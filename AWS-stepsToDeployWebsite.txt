@@ -1,0 +1,34 @@
+AWS->
+
+Steps->
+
+1) create IAM user with allowed policy.
+2) In that, create access key and save credentials and configure in CLI.
+
+3) go to ECR and create repo with only any repo name.
+4) then in that, in image see push commands, then use git bash for running those commands as macOS,
+change directory to main root of folder where both backend and frontend is,
+- use first command as it is,
+- use second commands as ->( docker build --platform linux/amd64 -t cohort-2-demo:latest . --load )->(instead of cohort-2-demo use repo name)
+- then remaining 2 commands as it is.
+
+5) create vpc with 'vpc and more' option with vpc name.
+
+6) in ECS, create cluster with name.
+7) then, create task definition by,
+   name , proper vCPU and memory and also,
+- in new console, go again to IAM and create role in roles with useCase: ElasticContainerService service:Task Execution Role for Elastic Container Service,
+  and next->next-> create it with role name.
+ - back to prev Console, now in task role use this new role as task and execution roles. 
+ - now in container-1 section, name and imageURI:'search repo name and select your image'.
+ - container port:3000, protocol:TCP, PortName: express-server, appProtocol:HTTP.
+ - add Envirmentaal variables one by one if exists, and press create.
+
+8) now go to clusters , then create in services.
+ - give name, and desired tasks:1 or 2.
+ - in networking, use your vpc and remove private subnets and security group acc to u.
+ - use load balancing, name application load balancer, name target group name.
+ - auto scaling if need and finally press create.
+ - takes some time to create cluster and then run the website through its DNS.
+ 
+ 
